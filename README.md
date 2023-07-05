@@ -50,7 +50,7 @@ Things you may want to cover:
 | price                   | integer | null: false                    |
 | delivery_charge_id      | integer | null: false                    |
 | explanation             | text    | null: false                    |
-| user                    | string  | null: false, foreign_key: true |
+| user                    | references  | null: false, foreign_key: true |
 | category_id             | integer | null: false                    |
 | quality_id              | integer | null: false                    |
 | shipping_origin_area_id | integer | null: false                    |
@@ -69,8 +69,8 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :user
-- has_one : item
-- has_one : recipient
+- belongs_to : item
+- has_many : recipients
 
 ## recipients テーブル
 
@@ -81,9 +81,9 @@ Things you may want to cover:
 | municipalities     | string     | null: false                    |
 | address            | string     | null: false                    |
 | building_name      | string     | ------------------------------ |
-| telephone_number   | integer    | null: false                    |
+| telephone_number   | string     | null: false                    |
 | purchase           | references | null: false, foreign_key: true |
 
 ### Association
-- has_one :purchase
+- belongs_to :purchase
 
