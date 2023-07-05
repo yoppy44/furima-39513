@@ -27,52 +27,49 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| first_name         | string | null: false |
-| last_name          | string | null: false |
-| first_name_kana    | string | null: false |
-| last_name_kana     | string | null: false |
-| birthday           | string | null: false |
+| Column             | Type   | Options      |
+| ------------------ | ------ | ------------ |
+| name               | string | null: false  |
+| email              | string | unique: true |
+| encrypted_password | string | null: false  |
+| first_name         | string | null: false  |
+| last_name          | string | null: false  | 
+| first_name_kana    | string | null: false  |
+| last_name_kana     | string | null: false  |
+| birthday           | date   | null: false  |
 
 ### Association
 - has_many :items
-- has_many :cards
 - has_many :recipients
 
 ## items テーブル
 
-| Column                  | Type    | Options     |
-| ----------------------- | ------- | ----------- |
-| item_name               | string  | null: false |
-| price                   | integer | null: false |
-| delivery_charge_id      | integer | null: false |
-| explanation             | text    | null: false |
-| seller_name             | string  | null: false |
-| category_id             | integer | null: false |
-| quality_id              | integer | null: false |
-| shipping_origin_area_id | integer | null: false |
-| delivery_date_id        | integer | null: false |
+| Column                  | Type    | Options                        |
+| ----------------------- | ------- | ------------------------------ |
+| item_name               | string  | null: false                    |
+| price                   | integer | null: false                    |
+| delivery_charge_id      | integer | null: false                    |
+| explanation             | text    | null: false                    |
+| seller_name             | string  | null: false, foreign_key: true |
+| category_id             | integer | null: false                    |
+| quality_id              | integer | null: false                    |
+| shipping_origin_area_id | integer | null: false                    |
+| delivery_date_id        | integer | null: false                    |
 
 ### Association
 - belongs_to :user
-- has_one :card
+- has_one :purchase
 
-## cards テーブル
+## purchase テーブル
 
-| Column       | Type    | Options     |
-| ------------ | ------- | ----------- |
-| card_num     | integer | null: false |
-| card_period  | integer | null: false |
-| security_num | integer | null: false |
+| Column             | Type   | Options                        |
+| ------------------ | ------ | ------------------------------ |
+| purchase_name      | string | null: false, foreign_key: true |
+| purchase_item      | string | null: false                    |
 
 ### Association
 - belongs_to :user
-- has_one :item
-- has_one :recipient
+- has_one : item
 
 ## recipients テーブル
 
@@ -84,7 +81,7 @@ Things you may want to cover:
 | address            | string  | null: false |
 | building_name      | string  | ----------- |
 | telephone_number   | integer | null: false |
+| recipient_name     | string  | null: false |
 
 ### Association
 - belongs_to :user
-- has_one :card
