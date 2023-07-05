@@ -27,20 +27,20 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options      |
-| ------------------ | ------ | ------------ |
-| name               | string | null: false  |
-| email              | string | unique: true |
-| encrypted_password | string | null: false  |
-| first_name         | string | null: false  |
-| last_name          | string | null: false  | 
-| first_name_kana    | string | null: false  |
-| last_name_kana     | string | null: false  |
-| birthday           | date   | null: false  |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| name               | string | null: false               |
+| email              | string | unique: true, null: false |
+| encrypted_password | string | null: false               |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               | 
+| first_name_kana    | string | null: false               |
+| last_name_kana     | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 - has_many :items
-- has_many :recipients
+- has_many :purchases
 
 ## items テーブル
 
@@ -50,7 +50,7 @@ Things you may want to cover:
 | price                   | integer | null: false                    |
 | delivery_charge_id      | integer | null: false                    |
 | explanation             | text    | null: false                    |
-| seller_name             | string  | null: false, foreign_key: true |
+| user                    | string  | null: false, foreign_key: true |
 | category_id             | integer | null: false                    |
 | quality_id              | integer | null: false                    |
 | shipping_origin_area_id | integer | null: false                    |
@@ -60,29 +60,30 @@ Things you may want to cover:
 - belongs_to :user
 - has_one :purchase
 
-## purchase テーブル
+## purchases テーブル
 
-| Column             | Type   | Options                        |
-| ------------------ | ------ | ------------------------------ |
-| purchase_name      | string | null: false, foreign_key: true |
-| purchase_item      | string | null: false                    |
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one : item
+- has_one : recipient
 
 ## recipients テーブル
 
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| post_cord          | string  | null: false |
-| prefectures        | integer | null: false |
-| municipalities     | string  | null: false |
-| address            | string  | null: false |
-| building_name      | string  | ----------- |
-| telephone_number   | integer | null: false |
-| recipient_name     | string  | null: false |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| post_cord          | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| municipalities     | string     | null: false                    |
+| address            | string     | null: false                    |
+| building_name      | string     | ------------------------------ |
+| telephone_number   | integer    | null: false                    |
+| purchase           | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
+- has_one :purchase
 
