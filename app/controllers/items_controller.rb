@@ -26,10 +26,8 @@ class ItemsController < ApplicationController
   def edit
     if current_user.id == @item.user_id
       render :edit
-    elsif current_user.id != @item.user_id  
+    else 
       redirect_to root_path
-    else
-      redirect_to new_user_session_path
     end  
   end
   
