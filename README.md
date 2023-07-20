@@ -77,7 +77,7 @@ Things you may want to cover:
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | post_cord          | string     | null: false                    |
-| prefecture_id      | integer    | null: false                    |
+| shipping_origin_area_id | references | null: false, foreign_key: true |
 | municipalities     | string     | null: false                    |
 | address            | string     | null: false                    |
 | building_name      | string     | ------------------------------ |
