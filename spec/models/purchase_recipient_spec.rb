@@ -12,6 +12,9 @@ RSpec.describe PurchaseRecipient, type: :model do
       it 'token、post_cord、shipping_origin_area_id、municipalities、address、building_name、telephone_number、purchase_idが存在すれば購入できる' do
         expect(@purchase_recipient).to be_valid
       end
+      it 'building_nameがなくとも登録できる' do
+        expect(@purchase_recipient).to be_valid
+      end  
     end
     context '商品購入ができない時' do
       it "tokenが空では登録できないこと" do
