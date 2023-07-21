@@ -1,10 +1,11 @@
 class PurchaseRecipient
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_cord, :shipping_origin_area_id, :municipalities, :address, :building_name, :telephone_number, :purchase_id
+  attr_accessor :user_id, :item_id, :token, :post_cord, :shipping_origin_area_id, :municipalities, :address, :building_name, :telephone_number, :purchase_id
 
 
   validates :user_id, presence: true
   validates :item_id, presence: true
+  validates :token, presence: true
   validates :post_cord, presence: true
   validates :post_cord, format: {with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)"}
   validates :shipping_origin_area_id, numericality: { other_than: 1 , message: "can't be blank"}

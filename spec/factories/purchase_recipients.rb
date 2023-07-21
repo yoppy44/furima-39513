@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :purchase_recipient do
     user_id {3}
     item_id {3}
+    token {"tok_abcdefghijk00000000000000000"}
     post_cord {'123-4567'}
     shipping_origin_area_id {13}
     municipalities {'浦安市ねずみ町'}
