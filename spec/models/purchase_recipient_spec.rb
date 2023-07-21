@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseRecipient, type: :model do
-  before do
-    @purchase_recipient = FactoryBot.build(:purchase_recipient)
-  end
-
   describe '商品購入画面' do
+    before do
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @purchase_recipient = FactoryBot.build(:purchase_recipient, user_id: user.id, item_id: item.id)
+    end
+
     context '商品購入ができる時' do
       it 'token、post_cord、shipping_origin_area_id、municipalities、address、building_name、telephone_number、purchase_idが存在すれば購入できる' do
         expect(@purchase_recipient).to be_valid
@@ -67,6 +69,16 @@ RSpec.describe PurchaseRecipient, type: :model do
         @purchase_recipient.valid?
         expect(@purchase_recipient.errors.full_messages).to include("Telephone number is invalid. Input only number")
       end  
-    end  
-  end  
+      it 'userが紐付いていないと保存できないこと' do
+        @purchase_recipient.user_id = nil
+        @purchase_recipient.valid?
+        expect(@purchase_recipient.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと保存できないこと' do
+        @purchase_recipient.item_id = nil
+        @purchase_recipient.valid?
+        expect(@purchase_recipient.errors.full_messages).to include("Item can't be blank")
+      end
+    end 
+  end   
 end
