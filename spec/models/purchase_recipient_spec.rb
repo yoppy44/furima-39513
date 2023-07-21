@@ -13,6 +13,7 @@ RSpec.describe PurchaseRecipient, type: :model do
         expect(@purchase_recipient).to be_valid
       end
       it 'building_nameがなくとも登録できる' do
+        @purchase_recipient.building_name = ''
         expect(@purchase_recipient).to be_valid
       end  
     end
