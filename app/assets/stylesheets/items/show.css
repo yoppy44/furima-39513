@@ -25,6 +25,20 @@
   font-size: 25px;
 }
 
+.other-images {
+  display: flex;
+}
+
+.other-image {
+  margin-right: 10px;
+}
+
+.image-delete-button {
+  text-align: center;
+  border: solid 1px;
+  cursor: pointer;
+}
+
 .item-box-img {
   height: 50vh;
   width: 60vw;
